@@ -85,7 +85,10 @@ color:#ff4d4d;
 <td>Blueberry Yogurt</td>
 <td id="blueberryQty">0</td>
 </tr>
-
+<tr>
+<td><b>Total Quantity</b></td>
+<td id="totalQty"><b>0</b></td>
+</tr>
 </table>
 
 <br>
@@ -105,7 +108,6 @@ color:#ff4d4d;
 
 const params = new URLSearchParams(window.location.search);
 
-// read values from URL
 const strawberry = parseInt(params.get("strawberry")) || 0;
 const mango = parseInt(params.get("mango")) || 0;
 const blueberry = parseInt(params.get("blueberry")) || 0;
@@ -114,17 +116,13 @@ const subtotal = params.get("subtotal") || "0.00";
 const tax = params.get("tax") || "0.00";
 const total = params.get("total") || "0.00";
 
-// update table quantities
 document.getElementById("strawberryQty").textContent = strawberry;
 document.getElementById("mangoQty").textContent = mango;
 document.getElementById("blueberryQty").textContent = blueberry;
 
-// calculate total quantity
-const quantity = strawberry + mango + blueberry;
+const totalQty = strawberry + mango + blueberry;
 
-// update totals
-document.getElementById("quantity").textContent =
-`${quantity} (Strawberry: ${strawberry}, Mango: ${mango}, Blueberry: ${blueberry})`;
+document.getElementById("totalQty").textContent = totalQty;
 
 document.getElementById("subtotal").textContent = subtotal;
 document.getElementById("tax").textContent = tax;
