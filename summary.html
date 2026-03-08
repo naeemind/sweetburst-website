@@ -102,17 +102,29 @@ color:#ff4d4d;
 
 <script>
 
-const params = new URLSearchParams(window.location.search)
+const params = new URLSearchParams(window.location.search);
 
-document.getElementById("strawberryQty").innerText = params.get("strawberry") || 0
-document.getElementById("mangoQty").innerText = params.get("mango") || 0
-document.getElementById("blueberryQty").innerText = params.get("blueberry") || 0
+// read flavor quantities
+const strawberry = parseInt(params.get("strawberry")) || 0;
+const mango = parseInt(params.get("mango")) || 0;
+const blueberry = parseInt(params.get("blueberry")) || 0;
 
-document.getElementById("subtotal").innerText = params.get("subtotal") || "0.00"
-document.getElementById("tax").innerText = params.get("tax") || "0.00"
-document.getElementById("total").innerText = params.get("total") || "0.00"
+// read totals
+const subtotal = params.get("subtotal") || "0.00";
+const tax = params.get("tax") || "0.00";
+const total = params.get("total") || "0.00";
+
+// calculate total quantity
+const quantity = strawberry + mango + blueberry;
+
+// update page
+document.getElementById("quantity").textContent =
+`${quantity} (Strawberry: ${strawberry}, Mango: ${mango}, Blueberry: ${blueberry})`;
+
+document.getElementById("subtotal").textContent = subtotal;
+document.getElementById("tax").textContent = tax;
+document.getElementById("total").textContent = total;
 
 </script>
-
 </body>
 </html>
