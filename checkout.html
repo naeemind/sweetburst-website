@@ -103,8 +103,41 @@ border-radius:8px;
 </div>
 
 <div class="form-group">
-<label>Quantity</label>
-<input type="number" id="quantity" value="1" min="1">
+<h3>Select Quantity by Flavor</h3>
+
+<table border="1" width="100%" style="text-align:center">
+
+<tr>
+<th>Flavor</th>
+<th>Price</th>
+<th>Quantity</th>
+</tr>
+
+<tr>
+<td>Strawberry Yogurt</td>
+<td>$1.79</td>
+<td>
+<input type="number" id="strawberry" value="0" min="0" onchange="calculate()">
+</td>
+</tr>
+
+<tr>
+<td>Mango Yogurt</td>
+<td>$1.79</td>
+<td>
+<input type="number" id="mango" value="0" min="0" onchange="calculate()">
+</td>
+</tr>
+
+<tr>
+<td>Blueberry Yogurt</td>
+<td>$1.79</td>
+<td>
+<input type="number" id="blueberry" value="0" min="0" onchange="calculate()">
+</td>
+</tr>
+
+</table>
 </div>
 
 <div class="summary">
@@ -146,41 +179,28 @@ IL:0.0625
 
 function calculate(){
 
-let qty = document.getElementById("quantity").value
+let strawberry = parseInt(document.getElementById("strawberry").value) || 0
+let mango = parseInt(document.getElementById("mango").value) || 0
+let blueberry = parseInt(document.getElementById("blueberry").value) || 0
+
+let totalUnits = strawberry + mango + blueberry
+
+let subtotal = totalUnits * price
+
 let state = document.getElementById("state").value
 
-let subtotal = qty * price
-let tax = subtotal * taxRates[state]
+let taxRate = taxRates[state] || 0
+
+let tax = subtotal * taxRate
+
 let total = subtotal + tax
 
+document.getElementById("units").innerText = totalUnits
 document.getElementById("subtotal").innerText = "$" + subtotal.toFixed(2)
 document.getElementById("tax").innerText = "$" + tax.toFixed(2)
 document.getElementById("total").innerText = "$" + total.toFixed(2)
 
 }
-
-document.getElementById("quantity").addEventListener("input", calculate)
-document.getElementById("state").addEventListener("change", calculate)
-
-document.getElementById("checkoutForm").addEventListener("submit", function(e){
-
-e.preventDefault()
-
-let name = document.getElementById("name").value
-let email = document.getElementById("email").value
-let qty = document.getElementById("quantity").value
-let state = document.getElementById("state").value
-
-let subtotal = qty * price
-let tax = subtotal * taxRates[state]
-let total = subtotal + tax
-
-window.location.href =
-`summary.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&qty=${qty}&subtotal=${subtotal.toFixed(2)}&tax=${tax.toFixed(2)}&total=${total.toFixed(2)}`
-
-})
-
-calculate()
 
 </script>
 
