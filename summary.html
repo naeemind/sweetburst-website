@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Order Summary</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.summary-container{
+max-width:700px;
+margin:auto;
+padding:40px;
+background:white;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+.order-details{
+margin-top:20px;
+background:#fff4f2;
+padding:20px;
+border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">SweetBurst</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="product.html">Product</a>
+<a href="checkout.html">Checkout</a>
+</nav>
+
+</header>
+
+<section class="summary-container">
+
+<h1>🎉 Order Confirmed</h1>
+
+<p>Thank you for supporting the <b>Fuel a Student</b> initiative!</p>
+
+<div class="order-details">
+
+<p><b>Name:</b> <span id="name"></span></p>
+
+<p><b>Product:</b> SweetBurst Creamy Fruit Power Bar</p>
+
+<p><b>Quantity:</b> <span id="qty"></span></p>
+
+<p><b>Subtotal:</b> $<span id="subtotal"></span></p>
+
+<p><b>Tax:</b> $<span id="tax"></span></p>
+
+<p><b>Total Paid:</b> <b>$<span id="total"></span></b></p>
+
+</div>
+
+<br>
+
+<a href="index.html" class="cta">Return Home</a>
+
+</section>
+
+<script>
+
+const params = new URLSearchParams(window.location.search)
+
+document.getElementById("name").innerText = params.get("name")
+document.getElementById("qty").innerText = params.get("qty")
+document.getElementById("subtotal").innerText = params.get("subtotal")
+document.getElementById("tax").innerText = params.get("tax")
+document.getElementById("total").innerText = params.get("total")
+
+</script>
+
+</body>
+</html>
