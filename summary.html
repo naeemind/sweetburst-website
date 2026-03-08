@@ -76,11 +76,22 @@ border-radius:10px;
 
 const params = new URLSearchParams(window.location.search)
 
-document.getElementById("name").innerText = params.get("name")
-document.getElementById("qty").innerText = params.get("qty")
-document.getElementById("subtotal").innerText = params.get("subtotal")
-document.getElementById("tax").innerText = params.get("tax")
-document.getElementById("total").innerText = params.get("total")
+let strawberry = params.get("strawberry") || 0
+let mango = params.get("mango") || 0
+let blueberry = params.get("blueberry") || 0
+
+let subtotal = params.get("subtotal") || "0.00"
+let tax = params.get("tax") || "0.00"
+let total = params.get("total") || "0.00"
+
+let totalQty = parseInt(strawberry) + parseInt(mango) + parseInt(blueberry)
+
+document.getElementById("quantity").innerText =
+`${totalQty} (Strawberry: ${strawberry}, Mango: ${mango}, Blueberry: ${blueberry})`
+
+document.getElementById("subtotal").innerText = subtotal
+document.getElementById("tax").innerText = tax
+document.getElementById("total").innerText = total
 
 </script>
 
