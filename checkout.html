@@ -185,26 +185,55 @@ let strawberry = parseInt(document.getElementById("strawberry").value) || 0
 let mango = parseInt(document.getElementById("mango").value) || 0
 let blueberry = parseInt(document.getElementById("blueberry").value) || 0
 
-let totalUnits = strawberry + mango + blueberry
+let units = strawberry + mango + blueberry
 
-let subtotal = totalUnits * price
+let subtotal = units * price
 
 let state = document.getElementById("state").value
 
-let taxRate = taxRates[state] || 0
-
-let tax = subtotal * taxRate
+let tax = subtotal * (taxRates[state] || 0)
 
 let total = subtotal + tax
 
-document.getElementById("units").innerText = totalUnits
+document.getElementById("units").innerText = units
 document.getElementById("subtotal").innerText = "$" + subtotal.toFixed(2)
 document.getElementById("tax").innerText = "$" + tax.toFixed(2)
 document.getElementById("total").innerText = "$" + total.toFixed(2)
 
 }
 
-</script>
+document.getElementById("strawberry").addEventListener("input",calculate)
+document.getElementById("mango").addEventListener("input",calculate)
+document.getElementById("blueberry").addEventListener("input",calculate)
+document.getElementById("state").addEventListener("change",calculate)
 
+document.getElementById("checkoutForm").addEventListener("submit", function(e){
+
+e.preventDefault()
+
+let strawberry = parseInt(document.getElementById("strawberry").value) || 0
+let mango = parseInt(document.getElementById("mango").value) || 0
+let blueberry = parseInt(document.getElementById("blueberry").value) || 0
+
+let units = strawberry + mango + blueberry
+
+if(units === 0){
+alert("Please select at least one bar.")
+return
+}
+
+let subtotal = units * price
+let state = document.getElementById("state").value
+let tax = subtotal * (taxRates[state] || 0)
+let total = subtotal + tax
+
+window.location.href =
+`summary.html?strawberry=${strawberry}&mango=${mango}&blueberry=${blueberry}&subtotal=${subtotal.toFixed(2)}&tax=${tax.toFixed(2)}&total=${total.toFixed(2)}`
+
+})
+
+calculate()
+
+</script>
 </body>
 </html>
