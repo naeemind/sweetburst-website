@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Order Summary</title>
 
@@ -12,6 +14,7 @@
 .summary-container{
 max-width:700px;
 margin:auto;
+margin-top:40px;
 padding:40px;
 background:white;
 border-radius:12px;
@@ -19,11 +22,22 @@ box-shadow:0 8px 20px rgba(0,0,0,0.1);
 text-align:center;
 }
 
-.order-details{
+.order-table{
+width:100%;
 margin-top:20px;
-background:#fff4f2;
-padding:20px;
-border-radius:10px;
+border-collapse:collapse;
+}
+
+.order-table th,
+.order-table td{
+padding:10px;
+border-bottom:1px solid #ddd;
+}
+
+.total{
+font-size:20px;
+font-weight:bold;
+color:#ff4d4d;
 }
 
 </style>
@@ -48,23 +62,37 @@ border-radius:10px;
 
 <h1>🎉 Order Confirmed</h1>
 
-<p>Thank you for supporting the <b>Fuel a Student</b> initiative!</p>
+<p>Thank you for supporting <b>Fuel a Student</b>.</p>
 
-<div class="order-details">
+<table class="order-table">
 
-<p><b>Name:</b> <span id="name"></span></p>
+<tr>
+<th>Flavor</th>
+<th>Quantity</th>
+</tr>
 
-<p><b>Product:</b> SweetBurst Creamy Fruit Power Bar</p>
+<tr>
+<td>Strawberry Yogurt</td>
+<td id="strawberryQty">0</td>
+</tr>
 
-<p><b>Quantity:</b> <span id="qty"></span></p>
+<tr>
+<td>Mango Yogurt</td>
+<td id="mangoQty">0</td>
+</tr>
 
-<p><b>Subtotal:</b> $<span id="subtotal"></span></p>
+<tr>
+<td>Blueberry Yogurt</td>
+<td id="blueberryQty">0</td>
+</tr>
 
-<p><b>Tax:</b> $<span id="tax"></span></p>
+</table>
 
-<p><b>Total Paid:</b> <b>$<span id="total"></span></b></p>
+<br>
 
-</div>
+<p>Subtotal: $<span id="subtotal"></span></p>
+<p>Tax: $<span id="tax"></span></p>
+<p class="total">Total Paid: $<span id="total"></span></p>
 
 <br>
 
@@ -76,22 +104,13 @@ border-radius:10px;
 
 const params = new URLSearchParams(window.location.search)
 
-let strawberry = params.get("strawberry") || 0
-let mango = params.get("mango") || 0
-let blueberry = params.get("blueberry") || 0
+document.getElementById("strawberryQty").innerText = params.get("strawberry") || 0
+document.getElementById("mangoQty").innerText = params.get("mango") || 0
+document.getElementById("blueberryQty").innerText = params.get("blueberry") || 0
 
-let subtotal = params.get("subtotal") || "0.00"
-let tax = params.get("tax") || "0.00"
-let total = params.get("total") || "0.00"
-
-let totalQty = parseInt(strawberry) + parseInt(mango) + parseInt(blueberry)
-
-document.getElementById("quantity").innerText =
-`${totalQty} (Strawberry: ${strawberry}, Mango: ${mango}, Blueberry: ${blueberry})`
-
-document.getElementById("subtotal").innerText = subtotal
-document.getElementById("tax").innerText = tax
-document.getElementById("total").innerText = total
+document.getElementById("subtotal").innerText = params.get("subtotal") || "0.00"
+document.getElementById("tax").innerText = params.get("tax") || "0.00"
+document.getElementById("total").innerText = params.get("total") || "0.00"
 
 </script>
 
